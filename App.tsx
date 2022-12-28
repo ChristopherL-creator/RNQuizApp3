@@ -10,26 +10,31 @@
  * @format
  */
 
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import {
   StyleSheet,
-  Text,
-  View,
 } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import MyStack from './navigation/index';
 
 const App = () => {
 
-  return (
-    <View> 
-      <Text> 
-        quizzler
-      </Text>
-    </View>
+  return ( 
+    <NavigationContainer> 
+      <SafeAreaProvider> 
+        <MyStack />
+      </SafeAreaProvider>
+    </NavigationContainer>
+
   );
 };
 
 const styles = StyleSheet.create({
-  
+  container: { 
+    paddingTop: 40, 
+    paddingHorizontal: 16, 
+  },
 });
 
 export default App;
