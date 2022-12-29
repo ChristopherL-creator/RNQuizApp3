@@ -2,17 +2,31 @@
 /* eslint-disable prettier/prettier */
 
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native'; 
+import PropTypes from 'prop-types';
 
-const Title = (props: any) => { 
-    return ( 
-        <View style={styles.container}> 
-            <Text style={styles.title}> 
-                {props.titleText}
-            </Text>
-        </View>
-    );
+//  used pureComponent instead of functional component
+class Title extends React.PureComponent<{titleText: string}, {value: string}> {
+    render() { 
+        
+        return ( 
+            <View style={styles.container}> 
+                <Text style={styles.title}> 
+                    {this.props.titleText}
+                </Text>
+            </View>
+        );
+    }
+} 
+
+// declare prop type
+Title.propTypes = { 
+    titleText: PropTypes.string,
 }; 
+//  defined default prop if custome one is missing
+Title.defaultProps = { 
+    titleText: 'titletext missing',
+};
 
 export default Title; 
 

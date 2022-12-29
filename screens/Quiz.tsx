@@ -3,6 +3,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Questions from '../models/Questions';
 
 const shuffleArray = (array: string | any[]) => { 
     for (let i = array.length - 1; i > 0; i--) {
@@ -11,26 +12,30 @@ const shuffleArray = (array: string | any[]) => {
     }
 };
 
-const Quiz = ({navigation}) => { 
-    const [questions, setQuestions] = useState(); 
+const Quiz = ({navigation}: any) => { 
+    const [questions, setQuestions] = useState<Questions>(); 
     const [options, setOptions] = useState([]);
     const [ques, setQues] = useState(0); 
     const [score, setScore] = useState(0); 
     const [isLoading, setIsLoading] = useState(false);
 
     const getQuiz = async () => { 
-        setIsLoading(true);
-
-        const url = 'https://opentdb.com/api.php?amount=10&type=multiple&encode=url3986'; 
-        const res = await fetch(url); 
-        const data = await res.json();
-
-        // console.log('res', data.results[0]);
-
-        setQuestions(data.results); 
-        setOptions(generateOptionsAndShuffle(data.results[0])); 
-
-        setIsLoading(false);
+        try {
+            setIsLoading(true);
+    
+            const url = 'https://opentdb.com/api.php?amount=10&type=multiple&encode=url3986'; 
+            const res = await fetch(url); 
+            const data = await res.json(); 
+            console.log('res', data.results);
+             // console.log('res', data.results[0]);
+    
+            setQuestions(data.results); 
+            setOptions(generateOptionsAndShuffle(data.results[0])); 
+    
+            setIsLoading(false);
+        } catch (error) {
+            console.log('error', error);
+        }
     }; 
 
     useEffect(() => { 
