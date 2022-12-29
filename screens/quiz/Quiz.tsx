@@ -2,8 +2,9 @@
 /* eslint-disable prettier/prettier */
 
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Questions from '../models/Questions';
+import { View, Text, TouchableOpacity } from 'react-native';
+import Questions from '../../models/Questions';
+import quizStyles from './Style';
 
 const shuffleArray = (array: string | any[]) => { 
     for (let i = array.length - 1; i > 0; i--) {
@@ -79,56 +80,56 @@ const Quiz = ({navigation}: any) => {
     };
 
     return ( 
-        <View style={styles.container}> 
+        <View style={quizStyles.container}> 
             {isLoading ? 
-                <View style={styles.loadingView}> 
-                    <Text style={styles.loadingText}> 
+                <View style={quizStyles.loadingView}> 
+                    <Text style={quizStyles.loadingText}> 
                         LOADING ...
                     </Text>
                 </View> :
                 questions && (
                 <> 
-                    <View style={styles.top}>
-                        <Text style={styles.question}>
+                    <View style={quizStyles.top}>
+                        <Text style={quizStyles.question}>
                             Q. {decodeURIComponent(questions[ques].question)}
                         </Text>
                     </View> 
                 
-                    <View style={styles.options}>
+                    <View style={quizStyles.options}>
                         <TouchableOpacity 
                         onPress={() => handSelectedOption(options[0])}
-                        style={styles.optionButton}>
-                            <Text style={styles.option}>
+                        style={quizStyles.optionButton}>
+                            <Text style={quizStyles.option}>
                                 {decodeURIComponent(options[0])}
                             </Text>
                         </TouchableOpacity>
                 
                         <TouchableOpacity 
                         onPress={() => handSelectedOption(options[1])}
-                        style={styles.optionButton}>
-                            <Text style={styles.option}>
+                        style={quizStyles.optionButton}>
+                            <Text style={quizStyles.option}>
                                 {decodeURIComponent(options[1])}
                             </Text>
                         </TouchableOpacity>
                 
                         <TouchableOpacity 
                         onPress={() => handSelectedOption(options[2])}
-                        style={styles.optionButton}>
-                            <Text style={styles.option}>
+                        style={quizStyles.optionButton}>
+                            <Text style={quizStyles.option}>
                                 {decodeURIComponent(options[2])}
                             </Text>
                         </TouchableOpacity>
                 
                         <TouchableOpacity 
                         onPress={() => handSelectedOption(options[3])}
-                        style={styles.optionButton}>
-                            <Text style={styles.option}>
+                        style={quizStyles.optionButton}>
+                            <Text style={quizStyles.option}>
                                 {decodeURIComponent(options[3])}
                             </Text>
                         </TouchableOpacity>
                     </View> 
                 
-                    <View style={styles.bottom}>
+                    <View style={quizStyles.bottom}>
                         {/* <TouchableOpacity style={styles.button}>
                             <Text style={styles.buttonText}>
                                 PREV
@@ -137,9 +138,9 @@ const Quiz = ({navigation}: any) => {
                 
                         {ques !== 9 && 
                             <TouchableOpacity 
-                            style={styles.button} 
+                            style={quizStyles.button} 
                             onPress={handleNextPress}>
-                                <Text style={styles.buttonText}>
+                                <Text style={quizStyles.buttonText}>
                                     SKIP
                                 </Text>
                             </TouchableOpacity> 
@@ -147,9 +148,9 @@ const Quiz = ({navigation}: any) => {
 
                         {ques === 9 && 
                             <TouchableOpacity 
-                            style={styles.button} 
+                            style={quizStyles.button} 
                             onPress={handleShowResults}>
-                                <Text style={styles.buttonText}>
+                                <Text style={quizStyles.buttonText}>
                                     SHOW RESULTS
                                 </Text>
                             </TouchableOpacity> 
@@ -163,73 +164,4 @@ const Quiz = ({navigation}: any) => {
 
 export default Quiz; 
 
-const styles = StyleSheet.create({ 
-    container: { 
-        paddingTop: 40, 
-        padding: 12, 
-        height: '100%',
-    }, 
 
-    top: { 
-        marginVertical: 16,
-    }, 
-
-    options: { 
-        marginVertical: 16, 
-        flex: 1,
-    }, 
-
-    bottom: { 
-        marginBottom: 12, 
-        paddingVertical: 16, 
-        justifyContent: 'space-between', 
-        flexDirection: 'row', 
-    }, 
-
-    button: { 
-        backgroundColor: '#1A759F', 
-        padding: 16, 
-        paddingHorizontal: 16, 
-        borderRadius: 16, 
-        alignItems: 'center', 
-        marginBottom: 30,
-    }, 
-
-    buttonText: { 
-        fontSize: 18, 
-        fontWeight: '600', 
-        color: '#E6E6F3',
-    }, 
-
-    question: { 
-        fontSize: 28, 
-        color: '#313131',
-    }, 
-
-    option: {
-        fontSize: 18, 
-        fontWeight: '500',
-        color: '#E6E6F3',
-    }, 
-
-    optionButton: { 
-        paddingVertical: 12, 
-        marginVertical: 6, 
-        backgroundColor: '#34A0A4', 
-        paddingHorizontal: 12, 
-        borderRadius: 12,
-    }, 
-
-    loadingView: { 
-        flex: 1, 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        height: '100%',
-    }, 
-
-    loadingText: { 
-        fontSize: 32, 
-        fontWeight: '700', 
-        color: '#313131',
-    },
-}); 
